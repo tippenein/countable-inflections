@@ -1,4 +1,4 @@
-name:                countable
+name:                countable-inflections
 version:             0.0.1
 synopsis:            Countable Text Inflections
 description:
@@ -8,8 +8,8 @@ description:
 license:             MIT
 license-file:        LICENSE.md
 author:              Brady Ouren <brady@andand.co>
-homepage:            https://github.com/tippenein/countable
-bug-reports:         https://github.com/tippenein/countable/issues
+homepage:            https://github.com/tippenein/countable-inflections
+bug-reports:         https://github.com/tippenein/countable-inflections/issues
 maintainer:          Brady Ouren <brady@andand.co>
 copyright:           2016 Brady Ouren
 category:            Text
@@ -20,7 +20,7 @@ extra-source-files:  CHANGELOG.md
 
 source-repository head
   type:            git
-  location:        https://github.com/tippenein/countable.git
+  location:        https://github.com/tippenein/countable-inflections.git
 
 flag dev
   description:        Turn on development settings.
@@ -44,7 +44,7 @@ test-suite test
   hs-source-dirs: test
   main-is: Spec.hs
   build-depends:
-      countable
+      countable-inflections
     , QuickCheck   >= 2.7.6 && < 3.0
     , base         >= 4.2   && < 4.10
     , hspec        >= 2.0   && < 3.0

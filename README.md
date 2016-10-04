@@ -1,9 +1,9 @@
 # Countable Inflections
 
 [![License MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
-[![Hackage](https://img.shields.io/hackage/v/countable.svg)](http://hackage.haskell.org/package/countable)
-[![Stackage LTS](http://stackage.org/package/countable/badge/lts)](http://stackage.org/lts/package/countable)
-[![Build Status](https://circleci.com/gh/tippenein/countable.svg?style=shield&circle-token=<TOKEN HERE>)](https://circleci.com/gh/tippenein/countable)
+[![Hackage](https://img.shields.io/hackage/v/countable-inflections.svg)](http://hackage.haskell.org/package/countable-inflections)
+[![Stackage LTS](http://stackage.org/package/countable-inflections/badge/lts)](http://stackage.org/lts/package/countable-inflections)
+[![Build Status](https://circleci.com/gh/tippenein/countable-inflections.svg?style=shield&circle-token=whatever)](https://circleci.com/gh/tippenein/countable-inflections)
 
 This library implements pluralization and singularization in a similar way to the [rails inflectors](http://api.rubyonrails.org/classes/ActiveSupport/Inflector.html)
 
