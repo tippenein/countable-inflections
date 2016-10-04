@@ -22,8 +22,44 @@ megaparsec to give you more guarantees
 
 λ: singularize "branches"
 "branch"
+```
+
+These can also be given custom inflection matchers
 
 ```
+λ: :t singularizeWith
+[Inflection] -> Text -> Text
+```
+
+There are 3 different types of transformations:
+
+Match (takes a PCRE regex and a replacement string)
+
+```
+λ: :t makeMatchMapping
+[(RegexPattern, RegexReplace)] -> [Inflection]
+
+λ: let mapping = makeMatchMapping [("(octop)us", "\1i")]
+λ: pluralizeWith mapping "octopus"
+"octopi"
+```
+
+Irregular (from singular to plural with no greater pattern)
+
+```
+λ: :t makeIrregularMapping
+[(Singular, Plural)] -> [Inflection]
+
+λ: let mapping = makeIrregularMapping [("zombie","zombies")]
+λ: pluralizeWith mapping "zombie"
+"zombies"
+```
+
+Uncountable (doesn't have a mapping, word stays the same) so it has the type:
+```
+[Text] -> [Inflection]
+```
+
 
 ## License
 
