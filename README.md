@@ -26,16 +26,18 @@ megaparsec to give you more guarantees
 
 These can also be given custom inflection matchers
 
-```
+```haskell
 λ: :t singularizeWith
 [Inflection] -> Text -> Text
 ```
 
 There are 3 different types of transformations:
 
-Match (takes a PCRE regex and a replacement string)
+### Match
 
-```
+Takes a PCRE regex and a replacement string.
+
+```haskell
 λ: :t makeMatchMapping
 [(RegexPattern, RegexReplace)] -> [Inflection]
 
@@ -44,9 +46,11 @@ Match (takes a PCRE regex and a replacement string)
 "octopi"
 ```
 
-Irregular (from singular to plural with no greater pattern)
+### Irregular
 
-```
+From singular to plural with no greater pattern.
+
+```haskell
 λ: :t makeIrregularMapping
 [(Singular, Plural)] -> [Inflection]
 
@@ -55,8 +59,11 @@ Irregular (from singular to plural with no greater pattern)
 "zombies"
 ```
 
-Uncountable (doesn't have a mapping, word stays the same) so it has the type:
-```
+### Uncountable
+
+Doesn't have a mapping, word stays the same) so it has the type:
+
+```haskell
 [Text] -> [Inflection]
 ```
 
