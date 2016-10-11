@@ -36,6 +36,9 @@ matchingCases = do
       singularize "mice" `shouldBe` "mouse"
       singularize "oxen" `shouldBe` "ox"
       singularize "branches" `shouldBe` "branch"
+      singularize "transactions" `shouldBe` "transaction"
+      singularize "sessions" `shouldBe` "session"
+      singularize "users" `shouldBe` "user"
 
 
 irregularCases :: Spec
