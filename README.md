@@ -41,7 +41,7 @@ Takes a PCRE regex and a replacement string.
 λ: :t makeMatchMapping
 [(RegexPattern, RegexReplace)] -> [Inflection]
 
-λ: let mapping = makeMatchMapping [("(octop)us", "\1i")]
+λ: let mapping = makeMatchMapping [("(octop)us", "\\1i")]
 λ: pluralizeWith mapping "octopus"
 "octopi"
 ```
