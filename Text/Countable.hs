@@ -22,12 +22,13 @@ module Text.Countable
   )
 where
 
-import Data.Maybe (catMaybes, fromMaybe)
-import Data.Monoid ((<>))
+import Data.Maybe (catMaybes, fromMaybe, isNothing)
 import Data.Text as T
 import Data.Text.Encoding (decodeUtf8, encodeUtf8)
 import Text.Countable.Data
-import Text.Regex.PCRE.Light
+import Text.Regex.PCRE.ByteString
+import Text.Regex.PCRE.ByteString.Utils (substitute')
+import System.IO.Unsafe
 
 type RegexPattern = T.Text
 type RegexReplace = T.Text
@@ -37,6 +38,8 @@ type Plural = T.Text
 data Inflection
   = Simple (Singular, Plural)
   | Match (Maybe Regex, RegexReplace)
+
+data MatchType = HasMatch | HasNoMatch
 
 -- | pluralize a word given a default mapping
 pluralize :: T.Text -> T.Text
@@ -108,34 +111,23 @@ runSub (Nothing, _) _ = Nothing
 runSub (Just reg, rep) t = matchWithReplace (reg, rep) t
 
 matchWithReplace :: (Regex, RegexReplace) -> T.Text -> Maybe T.Text
-matchWithReplace (reg, rep) t = do
-  matched : grouping <- regexMatch t reg
-  return $ (t `without` matched) <> groupReplace grouping rep
+matchWithReplace (reg, rep) t = case regexMatch t reg of
+  HasNoMatch -> Nothing
+  HasMatch   -> toMaybe $ substitute' reg (encodeUtf8 t) (encodeUtf8 rep)
   where
-    without t1 t2 = if t2 == "" then t1 else T.replace t2 "" t1
+    toMaybe = either (const Nothing) (Just . decodeUtf8)
 
-groupReplace :: [T.Text] -> T.Text -> T.Text
-groupReplace g rep =
-  case g of
-    [] -> rep
-    (g':_) -> g' <> additions
-    where
-      rep' = tailMaybe $ T.split ((==) '\1') rep
-      additions = T.concat $ fromMaybe [] rep'
-
-regexMatch :: T.Text -> Regex -> Maybe [T.Text]
-regexMatch t r = do
-  bs <- match r (encodeUtf8 t) []
-  return $ fmap decodeUtf8 bs
+regexMatch :: T.Text -> Regex -> MatchType
+regexMatch t r = case match of
+                   Left _ -> HasNoMatch
+                   Right m -> if isNothing m then HasNoMatch else HasMatch
+  where match = unsafePerformIO $ execute r (encodeUtf8 t)
 
 regexPattern :: T.Text -> Maybe Regex
-regexPattern pat = toMaybe $ compileM (encodeUtf8 pat) [caseless]
+regexPattern pat = toMaybe reg
   where toMaybe = either (const Nothing) Just
+        reg = unsafePerformIO $ compile compCaseless execBlank (encodeUtf8 pat)
 
 headMaybe :: [a] -> Maybe a
 headMaybe [] = Nothing
 headMaybe (x:_) = Just x
-
-tailMaybe :: [a] -> Maybe [a]
-tailMaybe [] = Nothing
-tailMaybe (_:xs) = Just xs
