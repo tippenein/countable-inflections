@@ -6,8 +6,8 @@ dependencies:
     - curl -L https://github.com/commercialhaskell/stack/releases/download/v1.0.4/stack-1.0.4-linux-x86_64.tar.gz | tar zx -C /tmp
     - sudo mv /tmp/stack-1.0.4-linux-x86_64/stack /usr/bin
   override:
-    - stack setup --no-system-ghc --install-ghc +RTS -M1024m -K1024m
-    - stack build --no-system-ghc --only-dependencies -j1
+    - stack setup --no-system-ghc --install-ghc
+    - stack build --no-system-ghc --only-dependencies
 
 test:
   override:
