@@ -67,6 +67,18 @@ Doesn't have a mapping, word stays the same) so it has the type:
 [Text] -> [Inflection]
 ```
 
+### Inflect
+
+In general you can input a number and singularize or pluralize based on the count, for example:
+
+```haskell
+setReport = do
+  sets <- getSets
+  n <- length sets
+  print $ show n ++ " " ++ inflect "sets" n
+```
+
+This way it'll list as "1 set" or "5 sets" based on the input.
 
 ## License
 

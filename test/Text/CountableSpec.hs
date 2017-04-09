@@ -10,6 +10,21 @@ spec :: Spec
 spec = do
   irregularCases
   matchingCases
+  inflectingCases
+
+inflectingCases :: Spec
+inflectingCases = do
+  describe "given 1" $ do
+    it "singularizes" $
+      inflect "sets" 1 `shouldBe` "set"
+
+  describe "given 10" $ do
+    it "pluralizes" $
+      inflect "sets" 10 `shouldBe` "sets"
+
+    it "pluralizes when in doubt" $
+      inflect "sets" (-1) `shouldBe` "sets"
+
 
 matchingCases :: Spec
 matchingCases = do
