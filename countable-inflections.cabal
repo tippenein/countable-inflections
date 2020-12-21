@@ -7,10 +7,10 @@ description:
 
 license:             MIT
 license-file:        LICENSE.md
-author:              Brady Ouren <brady@andand.co>
+author:              Brady Ouren <brady.ouren@gmail.com>
 homepage:            https://github.com/tippenein/countable-inflections
 bug-reports:         https://github.com/tippenein/countable-inflections/issues
-maintainer:          Brady Ouren <brady@andand.co>
+maintainer:          Brady Ouren <brady.ouren@gmail.com>
 copyright:           2016 Brady Ouren
 category:            Text
 build-type:          Simple

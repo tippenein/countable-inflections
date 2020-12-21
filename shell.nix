@@ -9,7 +9,7 @@ let
   }:
       mkDerivation {
         pname = "countable-inflections";
-        version = "0.2.0";
+        version = "0.3.0";
         src = ./.;
         libraryHaskellDepends = [
           base bytestring exceptions pcre-utils regex-pcre-builtin text
