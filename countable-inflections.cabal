@@ -32,7 +32,7 @@ library
   other-modules:       Text.Countable.Data
   ghc-options:         -Wall
   build-depends:
-      base
+      base >= 4.8 && < 5
     , exceptions
     , text
     , regex-pcre-builtin
