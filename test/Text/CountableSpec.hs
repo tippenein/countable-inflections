@@ -46,6 +46,9 @@ matchingCases = do
       pluralize "ox" `shouldBe` "oxen"
       pluralize "vertex" `shouldBe` "vertices"
 
+    it "can doesn't pluralize plurals a second time" $
+      pluralize "people" `shouldBe` "people"
+
   describe "singularize" $ do
     it "singularizes regex cases" $ do
       singularize "mice" `shouldBe` "mouse"

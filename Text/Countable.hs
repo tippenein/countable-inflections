@@ -49,7 +49,7 @@ data Inflection
 pluralize :: Text -> Text
 pluralize = pluralizeWith mapping
   where
-    mapping = defaultIrregulars ++ defaultUncountables ++ defaultPlurals
+    mapping = defaultUncountables ++ defaultPlurals ++ irregularPluralsAsUncountables ++ defaultIrregulars
 
 -- | singularize a word given a default mapping
 singularize :: Text -> Text
@@ -149,3 +149,8 @@ regexPattern pat = toMaybe reg
 headMaybe :: [a] -> Maybe a
 headMaybe [] = Nothing
 headMaybe (x:_) = Just x
+
+-- Treat irregular plurals as uncountables to avoid double pluralization
+irregularPluralsAsUncountables :: [Inflection]
+irregularPluralsAsUncountables =
+  makeUncountableMapping (map snd defaultIrregulars')
